@@ -1,0 +1,5 @@
+---
+# Variables specific to sudoers role in realworld don't add hash here directly
+users:
+  - username: "test"
+    password_hash: '$6$dleE4oLyzMalc.Ax$lvTWSoZD/fJfRDvYyHNi7txlwWeYowa7/JTxk7/Vkipb04aSMwjOQOPZ0PWee2h89tBLg4RZt2lDZdaKgaxt0/'

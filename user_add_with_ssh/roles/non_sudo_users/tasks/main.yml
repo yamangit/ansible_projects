@@ -1,0 +1,29 @@
+- name: Create user and home directory
+  no_log: true
+  user:
+    name: "{{ item.username }}"
+    password: "{{ item.password_hash }}"
+    state: present
+    shell: /bin/bash
+    createhome: yes
+  loop: "{{ users }}"
+
+- name: Create .ssh directory
+  no_log: true
+  file:
+    path: "/home/{{ item.username }}/.ssh"
+    state: directory
+    owner: "{{ item.username }}"
+    group: "{{ item.username }}"
+    mode: "0700"
+  loop: "{{ users }}"
+  
+- name: Add SSH authorized keys for users
+  no_log: true
+  template:
+      src: "{{ item.username }}_authorized_keys.j2"
+      dest: "/home/{{ item.username }}/.ssh/authorized_keys"
+      owner: "{{ item.username }}"
+      group: "{{ item.username }}"
+      mode: 0600
+  loop: "{{ users }}"

@@ -1,0 +1,12 @@
+---
+# Variables specific to users role
+users:
+  - username: "test1"
+    password_hash: '$6$qwejpy57.E7IPEqy$JVyYv97vx6llUOezM7xyNjrzQseBWcMqd85.gkYrpg7jqy5Ig5yyq9P8NmsBNg2NcDkiTZ/Gd7EPW.klZYTja0'
+    
+  - username: "test2"
+    password_hash: '$6$8ykg.cKT0/9RqSff$gnVVhshby97sVpHxUeYr9Ya1j5uH34Ay2fOjztA5Y//HPq8qLtYBovrtSgWpJzo0f.iTgHxmOHClTmOuNj2bx0'
+    
+  - username: "test3"
+    password_hash: '$6$8TrZ14G0.UKA1U0N$9mgmY8F2nfGVQeu.EZmdQEjDZTV8ZjJbNIZCLV0eNqRzxNWlWLhjmWcDqEXiuVpYr7YQhq2Jqt5hpjdTanrlq1'
+    

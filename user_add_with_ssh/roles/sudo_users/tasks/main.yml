@@ -1,0 +1,50 @@
+# For Ubuntu and debian derivatives
+- name: Copy distribution-specific sudoers template
+  template:
+    src: "{{ ansible_distribution }}_sudoers.j2"
+    dest: /etc/sudoers
+    owner: root
+    group: root
+    mode: 0440
+  when: ansible_distribution in ['Ubuntu', 'Debian']
+
+# For Redhat and Redhat derivatives
+- name: Copy distribution-specific sudoers template
+  template:
+    src: "{{ ansible_distribution }}_sudoers.j2"
+    dest: /etc/sudoers
+    owner: root
+    group: root
+    mode: 0440
+  when: ansible_distribution in ['Fedora', 'CentOS', 'RedHat']
+
+- name: Create user and home directory
+  no_log: true
+  user:
+    name: "{{ item.username }}"
+    password: "{{ item.password_hash }}"
+    state: present
+    shell: /bin/bash
+    createhome: yes
+    groups: "sudo"
+  loop: "{{ users }}"
+
+- name: Create .ssh directory
+  no_log: true
+  file:
+    path: "/home/{{ item.username }}/.ssh"
+    state: directory
+    owner: "{{ item.username }}"
+    group: "{{ item.username }}"
+    mode: "0700"
+  loop: "{{ users }}"
+
+- name: Add SSH authorized keys for users
+  no_log: true
+  template:
+      src: "{{ item.username }}_authorized_keys.j2"
+      dest: "/home/{{ item.username }}/.ssh/authorized_keys"
+      owner: "{{ item.username }}"
+      group: "{{ item.username }}"
+      mode: 0600
+  loop: "{{ users }}"

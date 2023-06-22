@@ -1,0 +1,10 @@
+- name: Configure sudo users and create non sudo users
+  hosts: all
+  remote_user: kubernetes
+  gather_facts: true
+  become: true
+  roles:
+    - role: sudo_users
+      tags: Added sudo Users
+    - role: non_sudo_users
+      tags: Added Non sudo Users
